@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.shiro.dao.PermissionMapper">
+
+	<select id="getPermissionByRoleName" parameterType="String" resultType="String">
+		select
+		r.permission permission
+		from roles_permissions r
+		<where>
+			<if test="_parameter  !=null">
+				role_name = #{role_name}
+			</if>
+		</where>
+	</select>
+	
+</mapper>
