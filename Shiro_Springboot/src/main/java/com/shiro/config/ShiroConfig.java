@@ -72,7 +72,7 @@ public class ShiroConfig {
         defaultSecurityManager.setRealm(userRealm());
         //session管理	
         //defaultSecurityManager.setSessionManager(defaultSessionManager()); 
-        defaultSecurityManager.setSessionManager(customSessionManager()); 
+        defaultSecurityManager.setSessionManager(customSessionManager());
         defaultSecurityManager.setCacheManager(redisCacheManager());
         return defaultSecurityManager;
     }
@@ -172,6 +172,7 @@ public class ShiroConfig {
     public CookieRememberMeManager cookieRememberMeManager() {
     	CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
     	cookieRememberMeManager.setCookie(simpleCookie());
+    	cookieRememberMeManager.setCipherKey("#{T(org.apache.shiro.codec.Base64).decode('6ZmI6I2j5Y+R5aSn5ZOlAA==')}".getBytes());
     	return cookieRememberMeManager;
     }
     
