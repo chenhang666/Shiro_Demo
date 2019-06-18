@@ -5,8 +5,10 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.SerializationUtils;
 
@@ -47,6 +49,7 @@ public class RedisCache<K, V> implements Cache<K, V>{
 	@Override
 	public V put(K k, V v) throws CacheException {
 		byte[] key = getKey(k);
+		System.out.println("v-------"+v);
         byte[] value = SerializationUtils.serialize(v);
         jedisUtil.set(key, value);
         jedisUtil.expire(key, 600);

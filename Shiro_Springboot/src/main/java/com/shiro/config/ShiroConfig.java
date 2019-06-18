@@ -51,7 +51,9 @@ public class ShiroConfig {
         // <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
         filterChainDefinitionMap.put("/webjars/**", "anon");
         filterChainDefinitionMap.put("/login", "anon");
-        filterChainDefinitionMap.put("/", "anon");
+        filterChainDefinitionMap.put("*.xml", "anon");
+        filterChainDefinitionMap.put("*.yml", "anon");
+        filterChainDefinitionMap.put("*.properties", "anon");
         filterChainDefinitionMap.put("/front/**", "anon");
         filterChainDefinitionMap.put("/api/**", "anon");
         filterChainDefinitionMap.put("/login1/**", "anon");
@@ -89,7 +91,10 @@ public class ShiroConfig {
     public UserRealm1 userRealm() {
     	UserRealm1 userRealm = new UserRealm1();
     	userRealm.setCredentialsMatcher(hashedCredentialsMatcher());
-    	userRealm.setCachingEnabled(false);
+    	userRealm.setCachingEnabled(true);
+        userRealm.setAuthenticationCachingEnabled(true);
+        userRealm.setAuthorizationCachingEnabled(true);
+        userRealm.setCacheManager(new RedisCacheManager());
         return userRealm;
     }
 	

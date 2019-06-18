@@ -9,8 +9,6 @@ import org.apache.shiro.cache.CacheManager;
 /**
 * @Description: RedisCacheManager shiro缓存
 * @author chenhang
- * @param <K>
- * @param <V>
 * @date 2019年6月13日
 *
 */
