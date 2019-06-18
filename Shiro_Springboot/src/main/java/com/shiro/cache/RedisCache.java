@@ -38,7 +38,6 @@ public class RedisCache<K, V> implements Cache<K, V>{
 	
 	@Override
 	public V get(K k) throws CacheException {
-		System.out.println("从Redis中获取权限数据");
         byte[] value = jedisUtil.get(getKey(k));
         if (value != null) {
             return (V) SerializationUtils.deserialize(value);
