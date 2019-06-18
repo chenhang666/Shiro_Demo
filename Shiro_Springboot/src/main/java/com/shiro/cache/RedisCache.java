@@ -49,7 +49,6 @@ public class RedisCache<K, V> implements Cache<K, V>{
 	@Override
 	public V put(K k, V v) throws CacheException {
 		byte[] key = getKey(k);
-		System.out.println("v-------"+v);
         byte[] value = SerializationUtils.serialize(v);
         jedisUtil.set(key, value);
         jedisUtil.expire(key, 600);
