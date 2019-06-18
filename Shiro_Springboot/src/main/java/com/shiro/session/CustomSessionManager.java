@@ -1,14 +1,13 @@
 package com.shiro.session;
 
-import java.io.Serializable;
-
-import javax.servlet.ServletRequest;
-
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.UnknownSessionException;
 import org.apache.shiro.session.mgt.SessionKey;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.apache.shiro.web.session.mgt.WebSessionKey;
+
+import javax.servlet.ServletRequest;
+import java.io.Serializable;
 
 /**
 * @Description: 自定义SessionManager  自带的SessionManage会增加redis的压力(一次访问多次读取等问题)

@@ -1,18 +1,14 @@
 package com.shiro.cache;
 
-import java.util.Collection;
-import java.util.Set;
-
-import javax.annotation.Resource;
-
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import com.shiro.util.JedisUtil;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
-import org.apache.shiro.util.ByteSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.SerializationUtils;
 
-import com.shiro.util.JedisUtil;
+import javax.annotation.Resource;
+import java.util.Collection;
+import java.util.Set;
 
 /**
 * @Description: cache实例
