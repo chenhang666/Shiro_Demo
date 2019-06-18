@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.Filter;
 
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.mgt.DefaultSessionManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
@@ -73,9 +74,10 @@ public class ShiroConfig {
         DefaultWebSecurityManager defaultSecurityManager = new DefaultWebSecurityManager();
         defaultSecurityManager.setRealm(userRealm());
         //session管理	
-        //defaultSecurityManager.setSessionManager(defaultSessionManager()); 
+        //defaultSecurityManager.setSessionManager(defaultSessionManager());
         defaultSecurityManager.setSessionManager(customSessionManager());
         defaultSecurityManager.setCacheManager(redisCacheManager());
+        defaultSecurityManager.setRememberMeManager(cookieRememberMeManager());
         return defaultSecurityManager;
     }
 
@@ -177,7 +179,11 @@ public class ShiroConfig {
     public CookieRememberMeManager cookieRememberMeManager() {
     	CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
     	cookieRememberMeManager.setCookie(simpleCookie());
-    	cookieRememberMeManager.setCipherKey("#{T(org.apache.shiro.codec.Base64).decode('6ZmI6I2j5Y+R5aSn5ZOlAA==')}".getBytes());
+        //rememberme cookie加密的密钥 建议每个项目都不一样 默认AES算法 密钥长度（128 256 512 位），通过以下代码可以获取
+        //KeyGenerator keygen = KeyGenerator.getInstance("AES");
+        //SecretKey deskey = keygen.generateKey();
+        //System.out.println(Base64.encodeToString(deskey.getEncoded()));
+    	cookieRememberMeManager.setCipherKey(Base64.decode("wGiHplamyXlVB11UXWol8g=="));
     	return cookieRememberMeManager;
     }
     
@@ -185,6 +191,8 @@ public class ShiroConfig {
     public SimpleCookie simpleCookie() {
     	SimpleCookie simpleCookie = new SimpleCookie();
     	simpleCookie.setMaxAge(3600);  			//单位秒
+        //如果httyOnly设置为true，则客户端不会暴露给客户端脚本代码，使用HttpOnly cookie有助于减少某些类型的跨站点脚本攻击；
+        simpleCookie.setHttpOnly(true);
     	simpleCookie.setName("rememberMe");
     	return simpleCookie;
     }

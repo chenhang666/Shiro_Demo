@@ -36,7 +36,7 @@ public class UserController {
         	token.setRememberMe(true);
         	if (!subject.isAuthenticated()){
                 subject.login(token);
-            }System.out.println("已登录");
+            }
         } catch (UnknownAccountException uae) {
             return "未知账户";
         } catch (IncorrectCredentialsException ice) {
