@@ -34,7 +34,9 @@ public class UserController {
         // 执行认证登陆
         try {      	
         	token.setRememberMe(true);
-            subject.login(token);
+        	if (!subject.isAuthenticated()){
+                subject.login(token);
+            }System.out.println("已登录");
         } catch (UnknownAccountException uae) {
             return "未知账户";
         } catch (IncorrectCredentialsException ice) {

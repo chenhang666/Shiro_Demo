@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.shiro.ByteSource.MyByteSource;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -76,9 +77,11 @@ public class UserRealm1 extends AuthorizingRealm{
 		//2、通过用户名获取凭证
 		String password = userService.getPasswordByUserName(userName);
 		if (password == null) {return null;}
-		SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo("chenhang", password,"userRealm");
+		//SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo("chenhang", password,"userRealm");
 		//将盐设置入authenticationInfo中
-		authenticationInfo.setCredentialsSalt(ByteSource.Util.bytes("chenhang" + "salt"));
+		//authenticationInfo.setCredentialsSalt(ByteSource.Util.bytes("chenhang" + "salt"));
+		//自定义SimpleByteSource,解决序列化失败问题
+		SimpleAuthenticationInfo authenticationInfo =  new SimpleAuthenticationInfo(userName, password,new MyByteSource(userName + "salt"),getName());
 		return authenticationInfo;
 	}
 
