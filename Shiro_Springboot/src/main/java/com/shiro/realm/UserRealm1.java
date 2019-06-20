@@ -41,10 +41,10 @@ public class UserRealm1 extends AuthorizingRealm{
 	@Autowired
 	private PermissionMapper permissionMapper;
 		
-	{		
+/*	{
 		//设置realm名字
 		this.setName("userRealm");
-	}
+	}*/
 
 	private static final Logger  log = LoggerFactory.getLogger(UserRealm1.class);
 	

@@ -92,6 +92,7 @@ public class ShiroConfig {
     @Bean
     public UserRealm1 userRealm() {
     	UserRealm1 userRealm = new UserRealm1();
+    	userRealm.setName("userRealm");
     	userRealm.setCredentialsMatcher(hashedCredentialsMatcher());
     	userRealm.setCachingEnabled(true);
         userRealm.setAuthenticationCachingEnabled(true);
