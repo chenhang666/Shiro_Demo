@@ -24,7 +24,7 @@ import org.apache.shiro.util.ByteSource;
 */
 public class UserRealm1 extends AuthorizingRealm{
 	
-	Map<String,String> userMap = new HashMap<>();
+	Map<String,String> userMap = new HashMap<String, String>();
 	
 	{
 		//e10adc3949ba59abbe56e057f20f883e  123456
@@ -70,14 +70,14 @@ public class UserRealm1 extends AuthorizingRealm{
 	}
 	
 	private Set<String> getPermissionByUserName(String userName) {
-		Set<String> sets = new HashSet<>();
+		Set<String> sets = new HashSet<String>();
 		sets.add("user:add");
 		sets.add("user:delete");
 		return sets;
 	}
 
 	private Set<String> getRolesByUserName(String userName) {
-		Set<String> sets = new HashSet<>();
+		Set<String> sets = new HashSet<String>();
 		sets.add("admin");
 		sets.add("none");
 		return sets;

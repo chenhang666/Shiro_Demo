@@ -22,7 +22,7 @@ import org.apache.shiro.subject.PrincipalCollection;
  */
 public class UserRealm extends AuthorizingRealm{
 
-    Map<String,String> userMap = new HashMap<>();
+    Map<String,String> userMap = new HashMap<String, String>();
 
     {
         userMap.put("chenhang", "123456");
@@ -63,14 +63,14 @@ public class UserRealm extends AuthorizingRealm{
     }
 
     private Set<String> getPermissionByUserName(String userName) {
-        Set<String> sets = new HashSet<>();
+        Set<String> sets = new HashSet<String>();
         sets.add("user:add");
         sets.add("user:delete");
         return sets;
     }
 
     private Set<String> getRolesByUserName(String userName) {
-        Set<String> sets = new HashSet<>();
+        Set<String> sets = new HashSet<String>();
         sets.add("admin");
         sets.add("none");
         return sets;
